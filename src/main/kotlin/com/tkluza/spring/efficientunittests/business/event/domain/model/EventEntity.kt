@@ -1,6 +1,7 @@
-package com.tkluza.spring.efficientunittests.event.domain.model
+package com.tkluza.spring.efficientunittests.business.event.domain.model
 
-import com.tkluza.spring.efficientunittests.place.domain.model.PlaceEntity
+import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
+import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -9,7 +10,7 @@ import javax.persistence.*
 class EventEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    override var id: Long? = null,
 
     @Column(name = "name")
     var name: Int? = null,
@@ -26,4 +27,4 @@ class EventEntity(
 
     @Column(name = "date")
     var date: LocalDate,
-)
+) : EntityWithId<Long?>

@@ -1,5 +1,6 @@
-package com.tkluza.spring.efficientunittests.place.domain.model
+package com.tkluza.spring.efficientunittests.business.place.domain.model
 
+import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import javax.persistence.*
 
 @Entity
@@ -7,7 +8,7 @@ import javax.persistence.*
 class PlaceEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    override var id: Long? = null,
 
     @Column(name = "name")
     var name: String,
@@ -17,4 +18,4 @@ class PlaceEntity(
 
     @OneToMany(mappedBy = "id")
     var seats: MutableSet<SeatEntity> = mutableSetOf(),
-)
+): EntityWithId<Long?>

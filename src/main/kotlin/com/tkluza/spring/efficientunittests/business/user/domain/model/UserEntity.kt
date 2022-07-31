@@ -1,5 +1,6 @@
-package com.tkluza.spring.efficientunittests.user.domain.model
+package com.tkluza.spring.efficientunittests.business.user.domain.model
 
+import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import javax.persistence.*
 
 @Entity
@@ -7,7 +8,7 @@ import javax.persistence.*
 class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    override var id: Long? = null,
 
     @Column(name = "first_name")
     var firstName: String,
@@ -17,6 +18,6 @@ class UserEntity(
 
     @Column(name = "email")
     var email: String,
-) {
+) : EntityWithId<Long?> {
     fun getFullName(): String = "$firstName $lastName"
 }

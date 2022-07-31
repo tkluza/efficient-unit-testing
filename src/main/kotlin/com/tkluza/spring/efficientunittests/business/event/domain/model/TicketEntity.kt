@@ -1,7 +1,8 @@
-package com.tkluza.spring.efficientunittests.event.domain.model
+package com.tkluza.spring.efficientunittests.business.event.domain.model
 
-import com.tkluza.spring.efficientunittests.place.domain.model.SeatEntity
-import com.tkluza.spring.efficientunittests.user.domain.model.UserEntity
+import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
+import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntity
+import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -11,7 +12,7 @@ import javax.persistence.*
 class TicketEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    override var id: Long? = null,
 
     @Column(name = "seat_id")
     var seatId: Long,
@@ -32,4 +33,4 @@ class TicketEntity(
 
     @Column(name = "sale_date")
     var saleDate: LocalDateTime? = null
-)
+): EntityWithId<Long?>
