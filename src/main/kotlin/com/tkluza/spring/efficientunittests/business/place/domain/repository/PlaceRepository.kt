@@ -1,6 +1,6 @@
 package com.tkluza.spring.efficientunittests.business.place.domain.repository
 
 import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface PlaceRepository : JpaRepository<PlaceEntity, Long>
+interface PlaceRepository : CrudRepository<PlaceEntity, Long>

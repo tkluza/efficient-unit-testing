@@ -1,6 +1,6 @@
 package com.tkluza.spring.efficientunittests.business.event.domain.repository
 
 import com.tkluza.spring.efficientunittests.business.event.domain.model.EventEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface EventRepository : JpaRepository<EventEntity, Long>
+interface EventRepository : CrudRepository<EventEntity, Long>

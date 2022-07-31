@@ -1,6 +1,6 @@
 package com.tkluza.spring.efficientunittests.business.place.domain.repository
 
 import com.tkluza.spring.efficientunittests.business.event.domain.model.TicketEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface TicketRepository : JpaRepository<TicketEntity, Long>
+interface TicketRepository : CrudRepository<TicketEntity, Long>
