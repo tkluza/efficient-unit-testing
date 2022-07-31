@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:efficient_unit_tests_db
+    username: sa
+    password: qwe123
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        show_sql: true
