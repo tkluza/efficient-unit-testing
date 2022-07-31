@@ -1,10 +1,10 @@
-package com.tkluza.spring.efficientunittests.test
+package com.tkluza.spring.efficientunittests.common.test
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 
 interface TestRepository<T : EntityWithId<ID>, ID> {
 
-    val typeClass: Class<T>
+    val entityClass: Class<T>
 
     fun save(entity: T): T
 

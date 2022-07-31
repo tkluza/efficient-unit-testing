@@ -1,4 +1,4 @@
-package com.tkluza.spring.efficientunittests.test.id
+package com.tkluza.spring.efficientunittests.common.test.id
 
 class LongIdGenerator : IdGenerator<Long?>(0L) {
 
