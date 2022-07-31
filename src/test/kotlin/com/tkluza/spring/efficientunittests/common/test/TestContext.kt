@@ -19,5 +19,7 @@ interface TestContext {
 
     fun <ID, T : EntityWithId<ID>> delete(entity: T)
 
+    fun <ID, T : EntityWithId<ID>> deleteAll(entities: List<T>)
+
     fun deleteAll()
 }
