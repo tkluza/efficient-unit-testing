@@ -1,4 +1,4 @@
-package com.tkluza.spring.efficientunittests.common.test.adapter
+package com.tkluza.spring.efficientunittests.common.test.inmemory
 
 import com.tkluza.spring.efficientunittests.common.extension.isNull
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId

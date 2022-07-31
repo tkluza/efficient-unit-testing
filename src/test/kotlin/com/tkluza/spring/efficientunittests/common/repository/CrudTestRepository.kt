@@ -1,4 +1,4 @@
-package com.tkluza.spring.efficientunittests.common.test.repository
+package com.tkluza.spring.efficientunittests.common.repository
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import com.tkluza.spring.efficientunittests.common.test.TestContext

@@ -1,4 +1,4 @@
-package com.tkluza.spring.efficientunittests.common.test.adapter
+package com.tkluza.spring.efficientunittests.common.test.inmemory
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import com.tkluza.spring.efficientunittests.common.test.TestContext
@@ -25,6 +25,12 @@ class InMemoryTestContext(
 
     override fun <ID, T : EntityWithId<ID>> delete(entity: T) {
         getTestRepository(entity.javaClass).delete(entity.id)
+    }
+
+    override fun <ID, T : EntityWithId<ID>> deleteAll(entities: List<T>) {
+        entities.forEach {
+            delete(it)
+        }
     }
 
     private fun <ID, T : EntityWithId<ID>> getTestRepository(entityClass: Class<T>): TestRepository<T, ID> =
