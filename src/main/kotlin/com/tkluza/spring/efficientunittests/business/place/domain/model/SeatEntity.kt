@@ -11,6 +11,13 @@ class SeatEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     override var id: Long = Long.notAssignedId(),
 
+    @Column(name = "place_id")
+    val placeId: Long,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id", updatable = false, insertable = false)
+    val placeEntity: PlaceEntity,
+
     @Column(name = "section")
     var section: String? = null,
 

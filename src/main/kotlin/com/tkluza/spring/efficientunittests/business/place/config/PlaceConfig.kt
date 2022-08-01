@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 class PlaceConfig {
 
     @Bean
-    fun userFacade(
+    fun placeFacade(
         placeRepository: PlaceRepository,
         seatRepository: SeatRepository
     ): PlaceFacade {

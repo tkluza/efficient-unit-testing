@@ -1,7 +1,5 @@
 package com.tkluza.spring.efficientunittests.business.event.domain.model
 
-import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
-import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntity
 import com.tkluza.spring.efficientunittests.common.extension.notAssignedId
 import com.tkluza.spring.efficientunittests.common.model.EntityWithLongId
 import java.math.BigDecimal
@@ -15,23 +13,22 @@ class TicketEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     override var id: Long = Long.notAssignedId(),
 
+    @Column(name = "event_id")
+    val eventId: Long,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", updatable = false, insertable = false)
+    val eventEntity: EventEntity,
+
     @Column(name = "seat_id")
     var seatId: Long,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id", insertable = false, updatable = false)
-    var seat: SeatEntity,
-
-    @Column(name = "participant_id")
-    var participantId: Long? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participant_id", insertable = false, updatable = false)
-    var participant: UserEntity,
+    @Column(name = "user_id")
+    var userId: Long? = null,
 
     @Column(name = "price")
     var price: BigDecimal,
 
     @Column(name = "sale_date")
     var saleDate: LocalDateTime? = null
-): EntityWithLongId
+) : EntityWithLongId

@@ -13,15 +13,15 @@ class EventEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     override var id: Long = Long.notAssignedId(),
 
-    @Column(name = "name")
-    var name: Int? = null,
-
     @Column(name = "place_id")
-    var placeId: Int? = null,
+    val placeId: Long,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id", insertable = false, updatable = false)
-    var place: PlaceEntity,
+    val placeEntity: PlaceEntity,
+
+    @Column(name = "name")
+    var name: String,
 
     @OneToMany(mappedBy = "id")
     var tickets: MutableSet<TicketEntity> = mutableSetOf(),
