@@ -1,10 +1,10 @@
-package com.tkluza.spring.efficientunittests.common.test.inmemory
+package com.tkluza.spring.efficientunittests.common.test.adapter
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import com.tkluza.spring.efficientunittests.common.test.TestContext
 import com.tkluza.spring.efficientunittests.common.test.TestRepository
 
-class InMemoryTestContext(
+class TestContextAdapter(
     private val testRepositories: List<TestRepository<*, *>>
 ) : TestContext {
 

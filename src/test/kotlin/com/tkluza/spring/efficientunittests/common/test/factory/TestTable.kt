@@ -5,7 +5,7 @@ import com.google.common.collect.Table
 import com.tkluza.spring.efficientunittests.common.extension.removeWhitespaces
 
 object TestTable {
-
+    
     const val COLUMN_KEY: String = "KEY"
     private const val COLUMN_SEPARATOR: String = "|"
 
@@ -25,7 +25,10 @@ object TestTable {
                 require(COLUMN_KEY == key) { "[KEY] column must be first! Instead: $key was found." }
             }
 
-    private fun mapToTable(header: Array<String>, rows: Array<String>): Table<String, String, String> {
+    private fun mapToTable(
+        header: Array<String>,
+        rows: Array<String>
+    ): Table<String, String, String> {
         val resultTable: Table<String, String, String> = HashBasedTable.create()
         rows.map {
             val currentRow: Array<String> = toSingleRow(it)

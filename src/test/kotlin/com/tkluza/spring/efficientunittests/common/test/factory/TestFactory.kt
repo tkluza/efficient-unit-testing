@@ -9,11 +9,15 @@ typealias TestFactoryMapper<T> = (Map<String, String>, TestContext) -> T
 
 object TestFactory {
 
-    fun createTestData(rows: Array<String>, testContext: TestContext, testFactoryMapper: TestFactoryMapper<EntityWithId<*>>) {
+    fun saveTestData(
+        rows: Array<String>,
+        testContext: TestContext,
+        testFactoryMapper: TestFactoryMapper<EntityWithId<*>>
+    ) {
         val testTable: Table<String, String, String> = TestTable.mapToTable(rows)
         for (row in testTable.rowMap().values) {
             testContext.save(
-                key = row[COLUMN_KEY] ?: "",
+                key = row[COLUMN_KEY] ?: throw IllegalStateException("[KEY] was not found for row: $row"),
                 entity = testFactoryMapper(row, testContext)
             )
         }
