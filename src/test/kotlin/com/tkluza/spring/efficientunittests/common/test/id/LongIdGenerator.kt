@@ -1,12 +1,14 @@
 package com.tkluza.spring.efficientunittests.common.test.id
 
-class LongIdGenerator : IdGenerator<Long?>(0L) {
+import com.tkluza.spring.efficientunittests.common.extension.notAssignedId
+
+class LongIdGenerator : IdGenerator<Long>(id = Long.notAssignedId()) {
 
     override fun increment() {
-        id = id?.inc()
+        id = id.inc()
     }
 
     override fun clear() {
-        id = 0L
+        id = Long.notAssignedId()
     }
 }

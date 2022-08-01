@@ -17,8 +17,8 @@ class EventConfig {
         eventRepository: EventRepository,
         ticketRepository: TicketRepository
     ): EventFacade {
-        val eventService = EventServiceAdapter(eventRepository = eventRepository)
-        val ticketService = TicketServiceAdapter(ticketRepository = ticketRepository)
+        val eventService = EventServiceAdapter(eventRepository)
+        val ticketService = TicketServiceAdapter(ticketRepository)
         return EventFacadeAdapter(
             eventService = eventService,
             ticketService = ticketService

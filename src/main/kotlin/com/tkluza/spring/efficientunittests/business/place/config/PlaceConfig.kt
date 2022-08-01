@@ -17,8 +17,8 @@ class PlaceConfig {
         placeRepository: PlaceRepository,
         seatRepository: SeatRepository
     ): PlaceFacade {
-        val placeService = PlaceServiceAdapter(placeRepository = placeRepository)
-        val seatService = SeatServiceAdapter(seatRepository = seatRepository)
+        val placeService = PlaceServiceAdapter(placeRepository)
+        val seatService = SeatServiceAdapter(seatRepository)
         return PlaceFacadeAdapter(
             placeService = placeService,
             seatService = seatService

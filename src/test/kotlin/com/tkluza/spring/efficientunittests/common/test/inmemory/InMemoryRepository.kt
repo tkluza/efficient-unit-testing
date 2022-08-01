@@ -1,14 +1,14 @@
-package com.tkluza.spring.efficientunittests.common.test.adapter
+package com.tkluza.spring.efficientunittests.common.test.inmemory
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import com.tkluza.spring.efficientunittests.common.test.TestRepository
 import com.tkluza.spring.efficientunittests.common.test.id.IdGenerator
 
-abstract class TestRepositoryAdapter<T : EntityWithId<ID>, ID>(
+abstract class InMemoryRepository<T : EntityWithId<ID>, ID>(
     override val entityClass: Class<T>,
     private val byId: MutableMap<ID, T> = mutableMapOf(),
     private val byKey: MutableMap<String, T> = mutableMapOf(),
-    private val identityGenerator: IdGenerator<ID>,
+    private val idGenerator: IdGenerator<ID>,
     private val keyPrefix: String,
 ) : TestRepository<T, ID> {
 
@@ -22,7 +22,7 @@ abstract class TestRepositoryAdapter<T : EntityWithId<ID>, ID>(
 
     private fun saveEntity(entity: T): T {
         if (!entity.isIdAssigned()) {
-            entity.id = identityGenerator.nextId()
+            entity.id = idGenerator.nextId()
         }
 
         byId[entity.id] = entity
@@ -79,4 +79,6 @@ abstract class TestRepositoryAdapter<T : EntityWithId<ID>, ID>(
         byId.clear()
         byKey.clear()
     }
+
+    override fun findAll(): List<T> = byId.values.toList()
 }

@@ -12,7 +12,7 @@ class UserConfig {
 
     @Bean
     fun userFacade(userRepository: UserRepository): UserFacade {
-        val userService = UserServiceAdapter(userRepository = userRepository)
+        val userService = UserServiceAdapter(userRepository)
         return UserFacadeAdapter(userService = userService)
     }
 }
