@@ -1,6 +1,7 @@
 package com.tkluza.spring.efficientunittests.business.place.domain.model
 
-import com.tkluza.spring.efficientunittests.common.model.EntityWithId
+import com.tkluza.spring.efficientunittests.common.extension.notAssignedId
+import com.tkluza.spring.efficientunittests.common.model.EntityWithLongId
 import javax.persistence.*
 
 @Entity
@@ -8,7 +9,7 @@ import javax.persistence.*
 class SeatEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Long? = null,
+    override var id: Long = Long.notAssignedId(),
 
     @Column(name = "section")
     var section: String? = null,
@@ -18,4 +19,4 @@ class SeatEntity(
 
     @Column(name = "seat_number")
     var seatNumber: Int,
-): EntityWithId<Long?>
+) : EntityWithLongId
