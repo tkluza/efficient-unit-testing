@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:h2:mem:efficient_unit_tests_db
     username: sa
-    password: qwe123
+    password: jordan23
     driver-class-name: org.h2.Driver
   h2:
     console:
@@ -12,3 +12,4 @@ spring:
     properties:
       hibernate:
         show_sql: true
+    open-in-view: false

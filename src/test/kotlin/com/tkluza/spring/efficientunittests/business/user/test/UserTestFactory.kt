@@ -12,7 +12,7 @@ object UserTestFactory {
 
     /**
      * Structure for [UserEntity] in tests
-     * <p>
+     *
      * | KEY | First name | Last name | Email |
      */
     fun saveUsers(userRows: Array<String>, testContext: TestContext) {

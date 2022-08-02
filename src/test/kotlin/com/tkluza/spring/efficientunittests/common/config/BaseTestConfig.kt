@@ -7,7 +7,7 @@ import com.tkluza.spring.efficientunittests.common.test.id.LongIdGenerator
 import com.tkluza.spring.efficientunittests.common.test.inmemory.InMemoryTestContext
 import org.springframework.context.annotation.Bean
 
-class TestConfig {
+class BaseTestConfig {
 
     @Bean
     fun idGenerator(): IdGenerator<Long> = LongIdGenerator()

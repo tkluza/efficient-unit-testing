@@ -24,7 +24,7 @@ object EventTestFactory {
 
     /**
      * Structure for [EventEntity] in tests
-     * <p>
+     *
      * | KEY | Place | Name | Date |
      */
     fun saveEvents(placeRows: Array<String>, testContext: TestContext) {
@@ -47,7 +47,7 @@ object EventTestFactory {
 
     /**
      * Structure for [TicketEntity] in tests
-     * <p>
+     *
      * | KEY | Event | Seat | User | Price | Sale date |
      */
     fun saveTickets(placeRows: Array<String>, testContext: TestContext) {

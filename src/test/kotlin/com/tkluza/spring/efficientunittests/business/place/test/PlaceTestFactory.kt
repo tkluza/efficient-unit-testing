@@ -16,7 +16,7 @@ object PlaceTestFactory {
 
     /**
      * Structure for [PlaceEntity] in tests
-     * <p>
+     *
      * | KEY | First name | Last name | Email |
      */
     fun savePlaces(placeRows: Array<String>, testContext: TestContext) {
@@ -35,7 +35,7 @@ object PlaceTestFactory {
 
     /**
      * Structure for [PlaceEntity] in tests
-     * <p>
+     *
      * | KEY | Place | Section | Row number | Seat number |
      */
     fun saveSeats(placeRows: Array<String>, testContext: TestContext) {
