@@ -1,6 +1,7 @@
 package com.tkluza.spring.efficientunittests.business.place.domain
 
 import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
+import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
 import com.tkluza.spring.efficientunittests.business.place.test.PlaceTestFactory
 import com.tkluza.spring.efficientunittests.common.BaseTest
 import io.kotest.assertions.assertSoftly
@@ -8,6 +9,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityNotFoundException
 
@@ -20,7 +22,7 @@ class PlaceFacadeTest : BaseTest() {
     inner class PlaceTests {
 
         @Test
-        fun `should find place by id`() {
+        fun `should find place by name`() {
             // given
             val placeName = "Allianz Arena"
 
@@ -74,13 +76,47 @@ class PlaceFacadeTest : BaseTest() {
         }
 
         @Test
-        fun `should throw exception if place with a given name was not found`() {
+        fun `should throw exception if place by a given name was not found`() {
             // given
             val placeName = "Helm's Deep"
 
             // when & then
             shouldThrow<EntityNotFoundException> {
                 placeFacade.findPlaceByName(placeName)
+            }
+        }
+    }
+
+    @Nested
+    inner class SeatTests {
+
+        @Test
+        fun `should find seat by id`() {
+            // given
+            val seatEntity = testDataContext["S-1", SeatEntity::class.java]!!
+
+            // when
+            val seatQuery = placeFacade.findSeatById(seatEntity.id)
+
+            // then
+            assertSoftly(seatQuery) {
+                id shouldBe seatEntity.id
+                placeId shouldBe seatEntity.placeId
+                section shouldBe "A"
+                rowNumber shouldBe 1
+                seatNumber shouldBe 5
+                isStanding shouldBe false
+            }
+        }
+
+        @Test
+        fun `should throw exception if seat by id was not found`() {
+            // given
+            val seatId = Long.MAX_VALUE
+
+            // when & then
+            assertThrows<EntityNotFoundException> {
+                placeFacade.findSeatById(seatId)
             }
         }
     }
