@@ -5,4 +5,6 @@ data class UserQuery(
     val firstName: String,
     val lastName: String,
     val email: String
-)
+) {
+    val userFullName: String = "$firstName $lastName"
+}

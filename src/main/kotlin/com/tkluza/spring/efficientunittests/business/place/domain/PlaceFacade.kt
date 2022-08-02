@@ -11,10 +11,10 @@ interface PlaceFacade {
     /**
      * Finds [PlaceQuery] by its name
      */
-    fun findPlaceByName(name: String): PlaceQuery
+    fun findPlaceByName(placeName: String): PlaceQuery
 
     /**
      * Finds [SeatQuery] by its id
      */
-    fun findSeatById(id: Long): SeatQuery
+    fun findSeatById(seatId: Long): SeatQuery
 }

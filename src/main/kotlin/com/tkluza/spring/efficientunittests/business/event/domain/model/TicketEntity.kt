@@ -1,5 +1,6 @@
 package com.tkluza.spring.efficientunittests.business.event.domain.model
 
+import com.tkluza.spring.efficientunittests.common.extension.isNotNull
 import com.tkluza.spring.efficientunittests.common.extension.notAssignedId
 import com.tkluza.spring.efficientunittests.common.model.EntityWithLongId
 import java.math.BigDecimal
@@ -31,4 +32,7 @@ class TicketEntity(
 
     @Column(name = "sale_date")
     var saleDate: LocalDateTime? = null
-) : EntityWithLongId
+) : EntityWithLongId {
+    fun isSold(): Boolean =
+        userId.isNotNull().and(saleDate.isNotNull())
+}

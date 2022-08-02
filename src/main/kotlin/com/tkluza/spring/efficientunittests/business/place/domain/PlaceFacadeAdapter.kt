@@ -10,9 +10,9 @@ class PlaceFacadeAdapter(
     private val seatService: SeatService
 ) : PlaceFacade {
 
-    override fun findPlaceByName(name: String): PlaceQuery =
-        placeService.findPlaceByName(name)
+    override fun findPlaceByName(placeName: String): PlaceQuery =
+        placeService.findPlaceByName(placeName)
 
-    override fun findSeatById(id: Long): SeatQuery =
-        seatService.findSeatById(id)
+    override fun findSeatById(seatId: Long): SeatQuery =
+        seatService.findSeatById(seatId)
 }

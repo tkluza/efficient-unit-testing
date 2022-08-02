@@ -10,5 +10,5 @@ interface UserFacade {
     /**
      * Finds [UserQuery] by its id
      */
-    fun findUserById(id: Long): UserQuery
+    fun findUserById(userId: Long): UserQuery
 }

@@ -7,6 +7,6 @@ class UserFacadeAdapter(
     private val userService: UserService
 ) : UserFacade {
 
-    override fun findUserById(id: Long): UserQuery =
-        userService.findUserById(id)
+    override fun findUserById(userId: Long): UserQuery =
+        userService.findUserById(userId)
 }

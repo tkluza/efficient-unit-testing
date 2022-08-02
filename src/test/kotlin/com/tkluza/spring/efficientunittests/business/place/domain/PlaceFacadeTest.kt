@@ -42,7 +42,7 @@ class PlaceFacadeTest : BaseTest() {
             val place = testDataContext["P-1", PlaceEntity::class.java]!!
 
             // when
-            val placeQuery = placeFacade.findPlaceByName(name = place.name)
+            val placeQuery = placeFacade.findPlaceByName(placeName = place.name)
 
             // then
             assertSoftly(placeQuery) {
@@ -65,7 +65,7 @@ class PlaceFacadeTest : BaseTest() {
             val place = testDataContext["P-3", PlaceEntity::class.java]!!
 
             // when
-            val placeQuery = placeFacade.findPlaceByName(name = place.name)
+            val placeQuery = placeFacade.findPlaceByName(placeName = place.name)
 
             // then
             assertSoftly(placeQuery) {

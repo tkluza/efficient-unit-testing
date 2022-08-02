@@ -11,6 +11,7 @@ class SeatMapper : BaseMapper<SeatEntity, SeatQuery> {
             SeatQuery(
                 id = id,
                 placeId = placeId,
+                placeName = placeEntity.name,
                 section = section,
                 rowNumber = rowNumber,
                 seatNumber = seatNumber,

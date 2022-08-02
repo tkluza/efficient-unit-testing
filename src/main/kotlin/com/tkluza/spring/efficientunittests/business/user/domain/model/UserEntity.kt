@@ -19,6 +19,4 @@ class UserEntity(
 
     @Column(name = "email")
     var email: String,
-) : EntityWithLongId {
-    fun getFullName(): String = "$firstName $lastName"
-}
+) : EntityWithLongId
