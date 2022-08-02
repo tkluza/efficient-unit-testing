@@ -10,7 +10,9 @@ class PlaceTestRepository(
 ) : CrudTestRepository<PlaceEntity, Long>(testDataContext = testDataContext, entityClass = PlaceEntity::class.java),
     PlaceRepository {
 
-    override fun findByName(name: String): Optional<PlaceEntity> {
-        TODO("Not yet implemented")
-    }
+    override fun findByName(name: String): Optional<PlaceEntity> =
+        Optional.ofNullable(
+            testDataContext.findAll(entityClass)
+                .find { it.name == name }
+        )
 }

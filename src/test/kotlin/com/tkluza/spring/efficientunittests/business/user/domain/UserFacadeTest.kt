@@ -24,10 +24,10 @@ class UserFacadeTest : BaseTest() {
 
         // then
         assertSoftly(user) {
-            it.id shouldBe userId
-            it.firstName shouldBe "Michael"
-            it.lastName shouldBe "Jordan"
-            it.email shouldBe "michael.jordan@chicago.bulls.com"
+            id shouldBe userId
+            firstName shouldBe "Michael"
+            lastName shouldBe "Jordan"
+            email shouldBe "michael.jordan@chicago.bulls.com"
         }
     }
 
