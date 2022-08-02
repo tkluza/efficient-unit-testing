@@ -2,9 +2,9 @@ package com.tkluza.spring.efficientunittests.business.place.domain.repository
 
 import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
 import com.tkluza.spring.efficientunittests.common.repository.CrudTestRepository
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 
 class SeatTestRepository(
-    testContext: TestContext
-) : CrudTestRepository<SeatEntity, Long>(testContext = testContext, entityClass = SeatEntity::class.java),
+    testDataContext: TestDataContext
+) : CrudTestRepository<SeatEntity, Long>(testDataContext = testDataContext, entityClass = SeatEntity::class.java),
     SeatRepository

@@ -2,6 +2,8 @@ package com.tkluza.spring.efficientunittests.business.place.config
 
 import com.tkluza.spring.efficientunittests.business.place.domain.PlaceFacade
 import com.tkluza.spring.efficientunittests.business.place.domain.PlaceFacadeAdapter
+import com.tkluza.spring.efficientunittests.business.place.domain.mapper.PlaceMapper
+import com.tkluza.spring.efficientunittests.business.place.domain.mapper.SeatMapper
 import com.tkluza.spring.efficientunittests.business.place.domain.repository.PlaceRepository
 import com.tkluza.spring.efficientunittests.business.place.domain.repository.SeatRepository
 import com.tkluza.spring.efficientunittests.business.place.domain.service.adapter.PlaceServiceAdapter
@@ -17,8 +19,14 @@ class PlaceConfig {
         placeRepository: PlaceRepository,
         seatRepository: SeatRepository
     ): PlaceFacade {
-        val placeService = PlaceServiceAdapter(placeRepository)
-        val seatService = SeatServiceAdapter(seatRepository)
+        val placeService = PlaceServiceAdapter(
+            placeRepository = placeRepository,
+            placeMapper = PlaceMapper()
+        )
+        val seatService = SeatServiceAdapter(
+            seatRepository = seatRepository,
+            seatMapper = SeatMapper()
+        )
         return PlaceFacadeAdapter(
             placeService = placeService,
             seatService = seatService

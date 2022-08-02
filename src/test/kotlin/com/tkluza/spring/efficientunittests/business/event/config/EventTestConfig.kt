@@ -6,7 +6,7 @@ import com.tkluza.spring.efficientunittests.business.event.domain.repository.Tic
 import com.tkluza.spring.efficientunittests.business.event.domain.repository.TicketTestRepository
 import com.tkluza.spring.efficientunittests.business.event.test.EventInMemoryRepository
 import com.tkluza.spring.efficientunittests.business.event.test.TicketInMemoryRepository
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.id.IdGenerator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Import
 class EventTestConfig {
 
     @Bean
-    fun eventRepository(testContext: TestContext): EventRepository =
-        EventTestRepository(testContext)
+    fun eventRepository(testDataContext: TestDataContext): EventRepository =
+        EventTestRepository(testDataContext)
 
     @Bean
-    fun ticketRepository(testContext: TestContext): TicketRepository =
-        TicketTestRepository(testContext)
+    fun ticketRepository(testDataContext: TestDataContext): TicketRepository =
+        TicketTestRepository(testDataContext)
 
     @Bean
     fun eventInMemoryTestRepository(idGenerator: IdGenerator<Long>): EventInMemoryRepository =

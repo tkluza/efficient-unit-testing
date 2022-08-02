@@ -1,49 +1,49 @@
 package com.tkluza.spring.efficientunittests.common.repository
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import org.springframework.data.repository.CrudRepository
 import java.util.Optional
 
 abstract class CrudTestRepository<T : EntityWithId<ID>, ID> protected constructor(
-    protected val testContext: TestContext,
+    protected val testDataContext: TestDataContext,
     protected val entityClass: Class<T>
 ) : CrudRepository<T, ID> {
 
     override fun <S : T> save(entity: S): S =
-        testContext.save(entity)
+        testDataContext.save(entity)
 
     override fun <S : T> saveAll(entities: MutableIterable<S>): MutableIterable<S> =
         entities
-            .map { testContext.save(it) }
+            .map { testDataContext.save(it) }
             .toMutableList()
 
     override fun findById(id: ID): Optional<T> =
         Optional.ofNullable(
-            testContext[id, entityClass]
+            testDataContext[id, entityClass]
         )
 
     override fun existsById(id: ID): Boolean =
-        testContext.findAll(entityClass)
+        testDataContext.findAll(entityClass)
             .any { it.id == id }
 
     override fun findAll(): List<T> =
-        testContext.findAll(entityClass).toMutableList()
+        testDataContext.findAll(entityClass).toMutableList()
 
     override fun findAllById(ids: MutableIterable<ID>): MutableIterable<T> =
         ids
-            .mapNotNull { testContext[it, entityClass] }
+            .mapNotNull { testDataContext[it, entityClass] }
             .toMutableList()
 
     override fun count(): Long =
         this.findAll().size.toLong()
 
     override fun deleteAll() {
-        testContext.deleteAll()
+        testDataContext.deleteAll()
     }
 
     override fun deleteAll(entities: MutableIterable<T>) {
-        testContext.deleteAll(entities.toList())
+        testDataContext.deleteAll(entities.toList())
     }
 
     override fun deleteAllById(ids: MutableIterable<ID>) {
@@ -51,7 +51,7 @@ abstract class CrudTestRepository<T : EntityWithId<ID>, ID> protected constructo
     }
 
     override fun delete(entity: T) {
-        testContext.delete(entity)
+        testDataContext.delete(entity)
     }
 
     override fun deleteById(id: ID) {

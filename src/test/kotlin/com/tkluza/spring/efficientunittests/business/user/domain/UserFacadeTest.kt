@@ -17,7 +17,7 @@ class UserFacadeTest : BaseTest() {
     @Test
     fun `should find user by id`() {
         // given
-        val userId = testContext["U-1", UserEntity::class.java]?.id!!
+        val userId = testDataContext["U-1", UserEntity::class.java]?.id!!
 
         // when
         val user = userFacade.findUserById(userId)

@@ -1,12 +1,12 @@
 package com.tkluza.spring.efficientunittests.common.test.inmemory
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
-import com.tkluza.spring.efficientunittests.common.test.TestContext
-import com.tkluza.spring.efficientunittests.common.test.TestRepository
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataRepository
 
-class InMemoryTestContext(
-    private val testRepositories: List<TestRepository<*, *>>
-) : TestContext {
+class InMemoryTestDataContext(
+    private val testRepositories: List<TestDataRepository<*, *>>
+) : TestDataContext {
 
     override fun <ID, T : EntityWithId<ID>> save(entity: T): T =
         getTestRepository(entity.javaClass).save(entity)
@@ -33,12 +33,12 @@ class InMemoryTestContext(
         }
     }
 
-    private fun <ID, T : EntityWithId<ID>> getTestRepository(entityClass: Class<T>): TestRepository<T, ID> =
+    private fun <ID, T : EntityWithId<ID>> getTestRepository(entityClass: Class<T>): TestDataRepository<T, ID> =
         (testRepositories.find {
             it.entityClass == entityClass
-        } ?: IllegalArgumentException("Cannot find test repository for: $entityClass.")) as TestRepository<T, ID>
+        } ?: IllegalArgumentException("Cannot find test repository for: $entityClass.")) as TestDataRepository<T, ID>
 
     override fun deleteAll() {
-        testRepositories.forEach(TestRepository<*, *>::deleteAll)
+        testRepositories.forEach(TestDataRepository<*, *>::deleteAll)
     }
 }

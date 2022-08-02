@@ -5,7 +5,7 @@ import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 /**
  * Main test context class for providing clear separation between data and repositories
  */
-interface TestContext {
+interface TestDataContext {
 
     fun <ID, T : EntityWithId<ID>> save(entity: T): T
 

@@ -2,7 +2,7 @@ package com.tkluza.spring.efficientunittests.business.place.test
 
 import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
 import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.factory.TestFactory
 
 object PlaceTestFactory {
@@ -20,15 +20,15 @@ object PlaceTestFactory {
      *
      * | KEY | Name | Address |
      */
-    fun savePlaces(placeRows: Array<String>, testContext: TestContext) {
+    fun savePlaces(placeRows: Array<String>, testDataContext: TestDataContext) {
         TestFactory.saveTestData(
             rows = placeRows,
-            testContext = testContext,
+            testDataContext = testDataContext,
             singleEntityCreator = this::createPlace
         )
     }
 
-    private fun createPlace(userRow: Map<String, String>, testContext: TestContext): PlaceEntity =
+    private fun createPlace(userRow: Map<String, String>, testDataContext: TestDataContext): PlaceEntity =
         PlaceEntity(
             name = userRow[COLUMN_NAME] ?: "",
             address = userRow[COLUMN_ADDRESS] ?: "",
@@ -39,16 +39,16 @@ object PlaceTestFactory {
      *
      * | KEY | Place | Section | Row number | Seat number | Is standing |
      */
-    fun saveSeats(placeRows: Array<String>, testContext: TestContext) {
+    fun saveSeats(placeRows: Array<String>, testDataContext: TestDataContext) {
         TestFactory.saveTestData(
             rows = placeRows,
-            testContext = testContext,
+            testDataContext = testDataContext,
             singleEntityCreator = this::createSeat
         )
     }
 
-    private fun createSeat(userRow: Map<String, String>, testContext: TestContext): SeatEntity {
-        val placeEntity = testContext[userRow.getValue(COLUMN_PLACE), PlaceEntity::class.java]!!
+    private fun createSeat(userRow: Map<String, String>, testDataContext: TestDataContext): SeatEntity {
+        val placeEntity = testDataContext[userRow.getValue(COLUMN_PLACE), PlaceEntity::class.java]!!
         return SeatEntity(
             placeId = placeEntity.id,
             placeEntity = placeEntity,

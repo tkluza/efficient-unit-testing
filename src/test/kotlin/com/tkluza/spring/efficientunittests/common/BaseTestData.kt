@@ -2,12 +2,12 @@ package com.tkluza.spring.efficientunittests.common
 
 import com.tkluza.spring.efficientunittests.business.place.test.PlaceTestFactory
 import com.tkluza.spring.efficientunittests.business.user.test.UserTestFactory
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.TestDataInitializer
 
 class BaseTestData : TestDataInitializer {
 
-    override fun init(testContext: TestContext) {
+    override fun init(testDataContext: TestDataContext) {
         UserTestFactory.saveUsers(
             userRows = arrayOf(
                 "| KEY | First name | Last name | Email                            |",
@@ -15,7 +15,7 @@ class BaseTestData : TestDataInitializer {
                 "| U-2 | Magic      | Johnson   | magic.johnson@la.lakers.com      |",
                 "| U-3 | LeBron     | James     | lebron.james@la.lakers.com       |",
             ),
-            testContext = testContext
+            testDataContext = testDataContext
         )
         PlaceTestFactory.savePlaces(
             placeRows = arrayOf(
@@ -23,7 +23,7 @@ class BaseTestData : TestDataInitializer {
                 "| P-1 | Allianz Arena    | Werner-Heisenberg-Allee 25, 80939 München   |",
                 "| P-2 | Spotify Camp Nou | C. d'Arístides Maillol, 12, 08028 Barcelona |",
             ),
-            testContext = testContext
+            testDataContext = testDataContext
         )
         PlaceTestFactory.saveSeats(
             placeRows = arrayOf(
@@ -35,7 +35,7 @@ class BaseTestData : TestDataInitializer {
                 "| S-5 | P-2   |         |            | 100         | true        |",
                 "| S-6 | P-2   |         |            | 200         | true        |",
             ),
-            testContext = testContext
+            testDataContext = testDataContext
         )
     }
 }

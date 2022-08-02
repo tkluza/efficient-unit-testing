@@ -4,7 +4,7 @@ import com.tkluza.spring.efficientunittests.business.event.config.EventTestConfi
 import com.tkluza.spring.efficientunittests.business.place.config.PlaceTestConfig
 import com.tkluza.spring.efficientunittests.business.user.config.UserTestConfig
 import com.tkluza.spring.efficientunittests.common.config.BaseTestConfig
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,13 +23,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 abstract class BaseTest {
 
     @Autowired
-    protected lateinit var testContext: TestContext
+    protected lateinit var testDataContext: TestDataContext
 
     private val baseTestData = BaseTestData()
 
     @BeforeEach
     protected open fun init() {
-        testContext.deleteAll()
-        baseTestData.init(testContext)
+        testDataContext.deleteAll()
+        baseTestData.init(testDataContext)
     }
 }

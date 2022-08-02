@@ -6,7 +6,7 @@ import com.tkluza.spring.efficientunittests.business.place.domain.repository.Sea
 import com.tkluza.spring.efficientunittests.business.place.domain.repository.SeatTestRepository
 import com.tkluza.spring.efficientunittests.business.place.test.PlaceInMemoryRepository
 import com.tkluza.spring.efficientunittests.business.place.test.SeatInMemoryRepository
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.id.IdGenerator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Import
 class PlaceTestConfig {
 
     @Bean
-    fun placeRepository(testContext: TestContext): PlaceRepository =
-        PlaceTestRepository(testContext)
+    fun placeRepository(testDataContext: TestDataContext): PlaceRepository =
+        PlaceTestRepository(testDataContext)
 
     @Bean
-    fun seatRepository(testContext: TestContext): SeatRepository =
-        SeatTestRepository(testContext)
+    fun seatRepository(testDataContext: TestDataContext): SeatRepository =
+        SeatTestRepository(testDataContext)
 
     @Bean
     fun placeInMemoryTestRepository(idGenerator: IdGenerator<Long>): PlaceInMemoryRepository =

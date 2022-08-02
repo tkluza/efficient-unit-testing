@@ -1,7 +1,7 @@
 package com.tkluza.spring.efficientunittests.business.user.test
 
 import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntity
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.factory.TestFactory
 
 object UserTestFactory {
@@ -15,15 +15,15 @@ object UserTestFactory {
      *
      * | KEY | First name | Last name | Email |
      */
-    fun saveUsers(userRows: Array<String>, testContext: TestContext) {
+    fun saveUsers(userRows: Array<String>, testDataContext: TestDataContext) {
         TestFactory.saveTestData(
             rows = userRows,
-            testContext = testContext,
+            testDataContext = testDataContext,
             singleEntityCreator = this::createUser
         )
     }
 
-    private fun createUser(userRow: Map<String, String>, testContext: TestContext): UserEntity =
+    private fun createUser(userRow: Map<String, String>, testDataContext: TestDataContext): UserEntity =
         UserEntity(
             firstName = userRow[COLUMN_FIRST_NAME] ?: "",
             lastName = userRow[COLUMN_LAST_NAME] ?: "",

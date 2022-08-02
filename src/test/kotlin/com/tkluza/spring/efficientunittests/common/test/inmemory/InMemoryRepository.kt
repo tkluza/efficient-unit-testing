@@ -1,7 +1,7 @@
 package com.tkluza.spring.efficientunittests.common.test.inmemory
 
 import com.tkluza.spring.efficientunittests.common.model.EntityWithId
-import com.tkluza.spring.efficientunittests.common.test.TestRepository
+import com.tkluza.spring.efficientunittests.common.test.TestDataRepository
 import com.tkluza.spring.efficientunittests.common.test.id.IdGenerator
 
 abstract class InMemoryRepository<T : EntityWithId<ID>, ID>(
@@ -10,7 +10,7 @@ abstract class InMemoryRepository<T : EntityWithId<ID>, ID>(
     private val byKey: MutableMap<String, T> = mutableMapOf(),
     private val idGenerator: IdGenerator<ID>,
     private val keyPrefix: String,
-) : TestRepository<T, ID> {
+) : TestDataRepository<T, ID> {
 
     override fun save(entity: T): T {
         saveEntity(entity)

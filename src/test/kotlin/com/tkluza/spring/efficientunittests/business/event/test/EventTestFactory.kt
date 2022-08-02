@@ -5,7 +5,7 @@ import com.tkluza.spring.efficientunittests.business.event.domain.model.TicketEn
 import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
 import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
 import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntity
-import com.tkluza.spring.efficientunittests.common.test.TestContext
+import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.factory.TestFactory
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -27,16 +27,16 @@ object EventTestFactory {
      *
      * | KEY | Place | Name | Date |
      */
-    fun saveEvents(placeRows: Array<String>, testContext: TestContext) {
+    fun saveEvents(placeRows: Array<String>, testDataContext: TestDataContext) {
         TestFactory.saveTestData(
             rows = placeRows,
-            testContext = testContext,
+            testDataContext = testDataContext,
             singleEntityCreator = this::createEvent
         )
     }
 
-    private fun createEvent(userRow: Map<String, String>, testContext: TestContext): EventEntity {
-        val placeEntity = testContext[userRow.getValue(COLUMN_PLACE), PlaceEntity::class.java]!!
+    private fun createEvent(userRow: Map<String, String>, testDataContext: TestDataContext): EventEntity {
+        val placeEntity = testDataContext[userRow.getValue(COLUMN_PLACE), PlaceEntity::class.java]!!
         return EventEntity(
             placeId = placeEntity.id,
             placeEntity = placeEntity,
@@ -50,18 +50,18 @@ object EventTestFactory {
      *
      * | KEY | Event | Seat | User | Price | Sale date |
      */
-    fun saveTickets(placeRows: Array<String>, testContext: TestContext) {
+    fun saveTickets(placeRows: Array<String>, testDataContext: TestDataContext) {
         TestFactory.saveTestData(
             rows = placeRows,
-            testContext = testContext,
+            testDataContext = testDataContext,
             singleEntityCreator = this::createTicket
         )
     }
 
-    private fun createTicket(userRow: Map<String, String>, testContext: TestContext): TicketEntity {
-        val eventEntity = testContext[userRow.getValue(COLUMN_EVENT), EventEntity::class.java]!!
-        val seatEntity = testContext[userRow.getValue(COLUMN_SEAT), SeatEntity::class.java]!!
-        val userEntity = testContext[userRow.getValue(COLUMN_USER), UserEntity::class.java]
+    private fun createTicket(userRow: Map<String, String>, testDataContext: TestDataContext): TicketEntity {
+        val eventEntity = testDataContext[userRow.getValue(COLUMN_EVENT), EventEntity::class.java]!!
+        val seatEntity = testDataContext[userRow.getValue(COLUMN_SEAT), SeatEntity::class.java]!!
+        val userEntity = testDataContext[userRow.getValue(COLUMN_USER), UserEntity::class.java]
         return TicketEntity(
             eventId = eventEntity.id,
             eventEntity = eventEntity,
