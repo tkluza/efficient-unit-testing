@@ -26,4 +26,7 @@ class SeatEntity(
 
     @Column(name = "seat_number")
     var seatNumber: Int,
+
+    @Column(name = "is_standing")
+    val isStanding: Boolean = false
 ) : EntityWithLongId

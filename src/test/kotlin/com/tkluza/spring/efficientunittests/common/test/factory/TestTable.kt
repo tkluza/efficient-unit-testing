@@ -2,18 +2,17 @@ package com.tkluza.spring.efficientunittests.common.test.factory
 
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
-import com.tkluza.spring.efficientunittests.common.extension.removeWhitespaces
 
 object TestTable {
-    
+
     const val COLUMN_KEY: String = "KEY"
-    private const val COLUMN_SEPARATOR: String = "|"
+    private const val COLUMN_DELIMITER: String = "|"
 
     fun mapToTable(rows: Array<String>): Table<String, String, String> =
         if (rows.size >= 2) {
             mapToTable(
                 header = createHeader(rows.first()),
-                rows = rows.sliceArray(IntRange(1, rows.size))
+                rows = rows.sliceArray(IntRange(1, rows.size - 1))
             )
         } else
             throw IllegalStateException("Test data should have must have [Header] and at least one [Row]")
@@ -42,7 +41,9 @@ object TestTable {
     }
 
     private fun toSingleRow(input: String): Array<String> =
-        input.split(COLUMN_SEPARATOR)
-            .map { it.removeWhitespaces() }
+        input.removePrefix(COLUMN_DELIMITER)
+            .removeSuffix(COLUMN_DELIMITER)
+            .split(COLUMN_DELIMITER)
+            .map { it.trim() }
             .toTypedArray()
 }

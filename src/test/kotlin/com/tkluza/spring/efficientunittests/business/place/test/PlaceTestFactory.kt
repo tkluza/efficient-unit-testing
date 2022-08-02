@@ -13,11 +13,12 @@ object PlaceTestFactory {
     private const val COLUMN_SECTION = "Section"
     private const val COLUMN_ROW_NUMBER = "Row number"
     private const val COLUMN_SEAT_NUMBER = "Seat number"
+    private const val COLUMN_IS_STANDING = "Is standing"
 
     /**
      * Structure for [PlaceEntity] in tests
      *
-     * | KEY | First name | Last name | Email |
+     * | KEY | Name | Address |
      */
     fun savePlaces(placeRows: Array<String>, testContext: TestContext) {
         TestFactory.saveTestData(
@@ -36,13 +37,13 @@ object PlaceTestFactory {
     /**
      * Structure for [PlaceEntity] in tests
      *
-     * | KEY | Place | Section | Row number | Seat number |
+     * | KEY | Place | Section | Row number | Seat number | Is standing |
      */
     fun saveSeats(placeRows: Array<String>, testContext: TestContext) {
         TestFactory.saveTestData(
             rows = placeRows,
             testContext = testContext,
-            singleEntityCreator = this::createPlace
+            singleEntityCreator = this::createSeat
         )
     }
 
@@ -52,8 +53,9 @@ object PlaceTestFactory {
             placeId = placeEntity.id,
             placeEntity = placeEntity,
             section = userRow[COLUMN_SECTION],
-            rowNumber = userRow[COLUMN_ROW_NUMBER]?.toInt(),
+            rowNumber = userRow[COLUMN_ROW_NUMBER]?.run { if (isNotBlank()) toInt() else null },
             seatNumber = userRow[COLUMN_SEAT_NUMBER]?.toInt() ?: 0,
+            isStanding = userRow[COLUMN_IS_STANDING].toBoolean()
         )
     }
 }
