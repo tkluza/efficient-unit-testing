@@ -8,7 +8,6 @@ import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntit
 import com.tkluza.spring.efficientunittests.common.test.TestDataContext
 import com.tkluza.spring.efficientunittests.common.test.factory.TestFactory
 import java.math.BigDecimal
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 object EventTestFactory {
@@ -41,7 +40,7 @@ object EventTestFactory {
             placeId = placeEntity.id,
             placeEntity = placeEntity,
             name = userRow[COLUMN_NAME] ?: "",
-            date = LocalDate.parse(userRow[COLUMN_DATE])
+            date = LocalDateTime.parse(userRow[COLUMN_DATE])
         )
     }
 

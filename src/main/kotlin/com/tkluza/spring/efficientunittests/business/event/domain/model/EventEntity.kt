@@ -3,7 +3,7 @@ package com.tkluza.spring.efficientunittests.business.event.domain.model
 import com.tkluza.spring.efficientunittests.business.place.domain.model.PlaceEntity
 import com.tkluza.spring.efficientunittests.common.extension.notAssignedId
 import com.tkluza.spring.efficientunittests.common.model.EntityWithLongId
-import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -27,5 +27,5 @@ class EventEntity(
     var tickets: MutableSet<TicketEntity> = mutableSetOf(),
 
     @Column(name = "date")
-    var date: LocalDate,
+    var date: LocalDateTime,
 ) : EntityWithLongId
