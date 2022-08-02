@@ -1,4 +1,4 @@
-package com.tkluza.spring.efficientunittests.business.user.dto
+package com.tkluza.spring.efficientunittests.business.user.dto.query
 
 data class UserQuery(
     val id: Long,

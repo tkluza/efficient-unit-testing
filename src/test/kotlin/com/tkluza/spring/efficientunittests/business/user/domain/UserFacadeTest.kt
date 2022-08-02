@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.EntityNotFoundException
 
-class UserTest : BaseTest() {
+class UserFacadeTest : BaseTest() {
 
     @Autowired
     private lateinit var userFacade: UserFacade
