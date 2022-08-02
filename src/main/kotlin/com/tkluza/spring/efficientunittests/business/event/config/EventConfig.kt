@@ -4,6 +4,7 @@ import com.tkluza.spring.efficientunittests.business.event.domain.EventFacade
 import com.tkluza.spring.efficientunittests.business.event.domain.EventFacadeAdapter
 import com.tkluza.spring.efficientunittests.business.event.domain.gateway.EventGateway
 import com.tkluza.spring.efficientunittests.business.event.domain.gateway.adapter.EventGatewayAdapter
+import com.tkluza.spring.efficientunittests.business.event.domain.mapper.TicketMapper
 import com.tkluza.spring.efficientunittests.business.event.domain.repository.EventRepository
 import com.tkluza.spring.efficientunittests.business.event.domain.repository.TicketRepository
 import com.tkluza.spring.efficientunittests.business.event.domain.service.adapter.TicketServiceAdapter
@@ -33,7 +34,8 @@ class EventConfig {
     ): EventFacade {
         val ticketService = TicketServiceAdapter(
             eventGateway = eventGateway,
-            ticketRepository = ticketRepository
+            ticketRepository = ticketRepository,
+            ticketMapper = TicketMapper()
         )
         return EventFacadeAdapter(
             ticketService = ticketService
