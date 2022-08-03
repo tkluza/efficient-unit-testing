@@ -3,7 +3,6 @@ package com.tkluza.spring.efficientunittests.business.event.domain
 import com.tkluza.spring.efficientunittests.business.event.test.EventTestFactory
 import com.tkluza.spring.efficientunittests.common.BaseTest
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 internal class EventFacadeTest : BaseTest() {
@@ -33,11 +32,6 @@ internal class EventFacadeTest : BaseTest() {
             ),
             testDataContext = testDataContext
         )
-    }
-
-    @Test
-    fun test() {
-
     }
 
     // TODO - Nested class for main business logic
