@@ -1,9 +1,11 @@
 package com.tkluza.spring.efficientunittests.business.event.domain
 
 import com.tkluza.spring.efficientunittests.business.event.domain.exception.TicketAlreadySoldException
+import com.tkluza.spring.efficientunittests.business.event.domain.gateway.EventGateway
 import com.tkluza.spring.efficientunittests.business.event.domain.model.TicketEntity
 import com.tkluza.spring.efficientunittests.business.event.dto.command.BuyTicketCommand
 import com.tkluza.spring.efficientunittests.business.event.test.EventTestFactory
+import com.tkluza.spring.efficientunittests.business.place.domain.model.SeatEntity
 import com.tkluza.spring.efficientunittests.business.user.domain.model.UserEntity
 import com.tkluza.spring.efficientunittests.common.BaseTest
 import io.kotest.assertions.assertSoftly
@@ -14,7 +16,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
+import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.mock.mockito.SpyBean
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.EntityNotFoundException
@@ -23,6 +29,9 @@ internal class EventFacadeTest : BaseTest() {
 
     @Autowired
     private lateinit var eventFacade: EventFacade
+
+    @SpyBean
+    private lateinit var eventGateway: EventGateway
 
     @BeforeEach
     override fun init() {
@@ -117,10 +126,49 @@ internal class EventFacadeTest : BaseTest() {
         }
     }
 
+    @Nested
+    inner class BuyTicketTestCommunicationViaGateway {
+
+        @Captor
+        private lateinit var findUserByIdArgumentCaptor: ArgumentCaptor<Long>
+
+        @Captor
+        private lateinit var findSeatByIdArgumentCaptor: ArgumentCaptor<Long>
+
+        @Test
+        fun `should get user information from user domain via gateway`() {
+            // given
+            val command = buildCommand(ticketKey = "T-1", userKey = "U-1")
+
+            // when
+            eventFacade.buyTicket(command)
+
+            // then
+            val user = testDataContext["U-1", UserEntity::class.java]!!
+
+            verify(eventGateway).findUserById(findUserByIdArgumentCaptor.capture())
+            findUserByIdArgumentCaptor.getValue() shouldBe user.id
+        }
+
+        @Test
+        fun `should get seat information from place domain via gateway`() {
+            // given
+            val command = buildCommand(ticketKey = "T-1", userKey = "U-1")
+
+            // when
+            eventFacade.buyTicket(command)
+
+            // then
+            val seat = testDataContext["S-1", SeatEntity::class.java]!!
+
+            verify(eventGateway).findSeatById(findSeatByIdArgumentCaptor.capture())
+            findSeatByIdArgumentCaptor.getValue() shouldBe seat.id
+        }
+    }
+
     private fun buildCommand(ticketKey: String, userKey: String): BuyTicketCommand =
         BuyTicketCommand(
             ticketId = testDataContext[ticketKey, TicketEntity::class.java]!!.id,
             userId = testDataContext[userKey, UserEntity::class.java]!!.id,
         )
-    // TODO - Nested class for testing gateway
 }
