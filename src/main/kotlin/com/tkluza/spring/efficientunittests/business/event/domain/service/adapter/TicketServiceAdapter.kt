@@ -8,7 +8,6 @@ import com.tkluza.spring.efficientunittests.business.event.domain.repository.Tic
 import com.tkluza.spring.efficientunittests.business.event.domain.service.TicketService
 import com.tkluza.spring.efficientunittests.business.event.dto.command.BuyTicketCommand
 import com.tkluza.spring.efficientunittests.business.event.dto.command.result.BuyTicketResult
-import com.tkluza.spring.efficientunittests.business.place.dto.query.SeatQuery
 import com.tkluza.spring.efficientunittests.business.user.dto.query.UserQuery
 import java.time.LocalDateTime
 import javax.persistence.EntityNotFoundException
@@ -22,20 +21,18 @@ class TicketServiceAdapter(
     override fun buyTicket(command: BuyTicketCommand): BuyTicketResult {
         val ticketEntity = findTicketById(command.ticketId)
         val userQuery: UserQuery = eventGateway.findUserById(command.userId)
-        val seatQuery: SeatQuery = eventGateway.findSeatById(command.seatId)
 
         validateTicket(ticket = ticketEntity)
 
         updateTicket(
             ticket = ticketEntity,
             userId = userQuery.id,
-            seatId = seatQuery.id
         )
 
         return ticketMapper.mapToBuyTicketResult(
             ticketEntity = ticketEntity,
             userQuery = userQuery,
-            seatQuery = seatQuery
+            seatQuery = eventGateway.findSeatById(ticketEntity.seatId)
         )
     }
 
@@ -43,10 +40,9 @@ class TicketServiceAdapter(
         ticketRepository.findById(ticketId)
             .orElseThrow { EntityNotFoundException("[TicketEntity] with [Id]: $ticketId was not found.") }
 
-    private fun updateTicket(ticket: TicketEntity, userId: Long, seatId: Long) {
+    private fun updateTicket(ticket: TicketEntity, userId: Long) {
         ticket.apply {
             this.userId = userId
-            this.seatId = seatId
             this.saleDate = LocalDateTime.now()
         }
     }
