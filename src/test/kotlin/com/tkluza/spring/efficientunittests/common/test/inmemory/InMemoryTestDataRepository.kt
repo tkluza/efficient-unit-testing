@@ -4,7 +4,7 @@ import com.tkluza.spring.efficientunittests.common.model.EntityWithId
 import com.tkluza.spring.efficientunittests.common.test.TestDataRepository
 import com.tkluza.spring.efficientunittests.common.test.id.IdGenerator
 
-abstract class InMemoryRepository<T : EntityWithId<ID>, ID>(
+abstract class InMemoryTestDataRepository<T : EntityWithId<ID>, ID>(
     override val entityClass: Class<T>,
     private val byId: MutableMap<ID, T> = mutableMapOf(),
     private val byKey: MutableMap<String, T> = mutableMapOf(),
