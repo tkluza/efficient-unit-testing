@@ -67,7 +67,7 @@ object EventTestFactory {
             seatId = seatEntity.id,
             userId = userEntity?.id,
             price = BigDecimal(userRow[COLUMN_PRICE]),
-            saleDate = LocalDateTime.parse(userRow[COLUMN_SALE_DATE])
+            saleDate = userRow[COLUMN_SALE_DATE]?.run { if (isNotBlank()) LocalDateTime.parse(this) else null }
         )
     }
 }
