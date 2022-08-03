@@ -12,10 +12,7 @@ import io.kotest.assertions.assertSoftly
 import io.kotest.matchers.date.shouldBeAfter
 import io.kotest.matchers.date.shouldBeBefore
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.*
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.Mockito.verify
@@ -122,6 +119,26 @@ internal class EventFacadeTest : BaseTest() {
             // when & then
             assertThrows<EntityNotFoundException> {
                 eventFacade.buyTicket(command)
+            }
+        }
+
+        @RepeatedTest(1000, name = "{displayName} {currentRepetition} of {totalRepetitions}")
+        fun `should buy lots of ticket to show how good this framework is`() {
+            // given
+            val command = buildCommand(ticketKey = "T-1", userKey = "U-3")
+
+            // when
+            val result = eventFacade.buyTicket(command)
+
+            // then
+            assertSoftly(result) {
+                eventName shouldBe "Beer wih Us!"
+                placeName shouldBe "Allianz Arena"
+                seatInfo shouldBe "Section: A | Row: 1 | Seat: 5"
+                userFullName shouldBe "LeBron James"
+                price shouldBe BigDecimal(200)
+                saleDate shouldBeBefore LocalDateTime.now()
+                saleDate shouldBeAfter LocalDateTime.now().minusMinutes(1)
             }
         }
     }

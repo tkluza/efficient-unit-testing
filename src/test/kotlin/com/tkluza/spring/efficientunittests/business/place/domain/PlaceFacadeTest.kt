@@ -119,7 +119,5 @@ class PlaceFacadeTest : BaseTest() {
                 placeFacade.findSeatById(seatId)
             }
         }
-
-        // TODO - Nested class for parametrized tests - let us benchmark it!
     }
 }
